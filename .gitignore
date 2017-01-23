@@ -1,2 +1,5 @@
 .vscode
 tmp
+__pycache__
+data
+logs
