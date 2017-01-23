@@ -4,7 +4,7 @@ import time
 import logging
 
 import atmos  # pip it
-import sense_emu
+import sense_hat
 
 
 def get_abs_humidity(sense):
@@ -38,7 +38,7 @@ def take_baseline(sense):
 
 def run_experiment(duration):
     """Runs the primary experiment, given its duration in minutes"""
-    sense = sense_emu.SenseHat()
+    sense = sense_hat.SenseHat()
     logger = logging.getLogger("Primary")
     num_loops = duration*6 # Get duration in seconds (*60) and divide by 10, for loops.
     num_loops -= (5) # Take away some loops to estimate baseline time consumption.

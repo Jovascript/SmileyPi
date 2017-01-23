@@ -2,7 +2,7 @@
 import time
 import logging
 
-import sense_emu
+import sense_hat
 
 import datalogger
 import shadow
@@ -14,7 +14,7 @@ def run_experiment(duration, measurement_freq):
 
     datalog = datalogger.DataLogger("secondary", ["timestamp", "temp", "light_intensity"])
     logger = logging.getLogger("Secondary")
-    sense = sense_emu.SenseHat()
+    sense = sense_hat.SenseHat()
 
     # Number of times to run loop, convert minutes into seconds and divide.
     num_loops = int((duration*60)/measurement_freq)

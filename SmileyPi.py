@@ -1,5 +1,7 @@
 import logging
+import os
 import time
+
 
 def setupLogger():
     # create logger with correct name
@@ -21,7 +23,11 @@ def setupLogger():
     logger.addHandler(ch)
     return logger
 
+def prepareDirs():
+    # Creates dirs if they don't exist, only for python 3.2+
+    os.makedirs("logs", exist_ok=True)
+    os.makedirs("data", exist_ok=True)
+
 # How long the experiment will last, and the script will run, in hours.
 logger = setupLogger()
 logger.info("Hi")
-
