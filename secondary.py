@@ -8,13 +8,12 @@ import datalogger
 import shadow
 
 
-def run_experiment(duration, measurement_freq):
+def run_experiment(duration, measurement_freq, sense, lighting):
     '''Run the experiment, give the duration in minutes,
     and how often to take measurements(in seconds)'''
 
     datalog = datalogger.DataLogger("secondary", ["timestamp", "temp", "light_intensity"])
     logger = logging.getLogger("Secondary")
-    sense = sense_hat.SenseHat()
 
     # Number of times to run loop, convert minutes into seconds and divide.
     num_loops = int((duration*60)/measurement_freq)

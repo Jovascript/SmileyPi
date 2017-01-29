@@ -4,7 +4,10 @@ import time
 import logging
 
 import atmos  # pip it
-import sense_hat
+
+import animations
+import animated_sense_hat
+
 
 
 def get_abs_humidity(sense):
@@ -36,9 +39,8 @@ def take_baseline(sense):
     valrange = max(measurements) - min(measurements)
     return avg, valrange
 
-def run_experiment(duration):
+def run_experiment(duration, sense:animated_sense_hat.AnimatedSenseHat):
     """Runs the primary experiment, given its duration in minutes"""
-    sense = sense_hat.SenseHat()
     logger = logging.getLogger("Primary")
     num_loops = duration*6 # Get duration in seconds (*60) and divide by 10, for loops.
     num_loops -= (5) # Take away some loops to estimate baseline time consumption.
@@ -50,16 +52,14 @@ def run_experiment(duration):
             if not astronaut:
                 astronaut = True
                 logger.info("Astronaut Detected")
-                sense.clear(0, 255, 0)
+                sense.show_animation(animations.astronaut_here)
         else:
-            sense.clear(255, 0, 0)
             if astronaut:
                 astronaut = False
                 logger.info("Astronaut Left")
+                sense.show_animation(animations.astronaut_away)
             if humidity < (avg + 2*valrange):
                 logger.info("Retaking Baseline")
                 avg, valrange = take_baseline(sense)
         time.sleep(10)
-if __name__ == "__main__":
-    run_experiment(10)
     

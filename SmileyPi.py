@@ -2,6 +2,7 @@ import logging
 import os
 import time
 
+from animated_sense_hat import AnimatedSenseHat
 
 def setupLogger():
     # create logger with correct name
@@ -28,6 +29,8 @@ def prepareDirs():
     os.makedirs("logs", exist_ok=True)
     os.makedirs("data", exist_ok=True)
 
-# How long the experiment will last, and the script will run, in hours.
-logger = setupLogger()
-logger.info("Hi")
+def run():
+    setupLogger()
+    prepareDirs()
+    sense = AnimatedSenseHat()
+    
