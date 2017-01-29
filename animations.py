@@ -61,7 +61,7 @@ astronaut_away = [
 ]
 
 # Animation for sunrise
-x = yellowy
+X = yellowy
 sunrise = [
     [
         O, O, O, O, O, O, O, O,
