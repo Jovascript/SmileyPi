@@ -9,7 +9,7 @@ from sense_hat import SenseHat
 class AnimatedSenseHat(SenseHat):
     """Handles threaded animation runner."""
     def __init__(self, imu_settings_file='RTIMULib', text_assets='sense_hat_text'):
-        super().__init__(self, imu_settings_file, text_assets)
+        super().__init__(imu_settings_file, text_assets)
         self.queue = Queue() # A thread-safe data interchange?
         # I hope
 
