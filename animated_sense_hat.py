@@ -39,3 +39,4 @@ class AnimatedSenseHat(SenseHat):
                 # We ingore the risk that the queue might be changed in this time.
                 # This (should) be the only thread accessing it.
                 status = self.queue.get()
+        self.clear()
