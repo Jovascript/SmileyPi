@@ -39,7 +39,7 @@ def take_baseline(sense):
     valrange = max(measurements) - min(measurements)
     return avg, valrange
 
-def run_experiment(duration, sense:animated_sense_hat.AnimatedSenseHat):
+def run_experiment(duration, sense: animated_sense_hat.AnimatedSenseHat):
     """Runs the primary experiment, given its duration in minutes"""
     logger = logging.getLogger("Primary")
     num_loops = duration*6 # Get duration in seconds (*60) and divide by 10, for loops.
@@ -60,6 +60,8 @@ def run_experiment(duration, sense:animated_sense_hat.AnimatedSenseHat):
                 sense.show_animation(animations.astronaut_away)
             if humidity < (avg + 2*valrange):
                 logger.info("Retaking Baseline")
+                sense.show_animation(animations.baseline)
                 avg, valrange = take_baseline(sense)
+                sense.show_animation(animations.astronaut_away)
         time.sleep(10)
     

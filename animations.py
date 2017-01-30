@@ -107,3 +107,30 @@ sun_full = [
         O, O, X, X, X, X, O, O
     ]
 ]
+
+# Animation for taking baseline.
+
+X = green
+baseline = [
+    [
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        O, X, O, O, O, O, O, X,
+        X, O, X, O, O, O, X, O,
+        O, O, O, X, O, X, O, O,
+        O, O, O, X, O, X, O, O,
+        O, O, O, O, X, O, O, O
+    ],
+    [
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        X, X, X, X, X, X, X, X,
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O
+    ]
+
+]
