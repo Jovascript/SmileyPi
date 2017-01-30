@@ -43,28 +43,29 @@ def run_experiment(duration, sense: animated_sense_hat.AnimatedSenseHat):
     logger = logging.getLogger("Primary")
     num_loops = duration*6 # Get duration in seconds (*60) and divide by 10, for loops.
     num_loops -= (5) # Take away some loops to estimate baseline time consumption.
+    sense.show_animation(animations.baseline)
     avg, valrange = take_baseline(sense)
-    astronaut = False
+    astronaut = prev_astronaut = False
     for _ in range(num_loops):
         humidity = get_abs_humidity(sense)
         if humidity > (avg + 2*valrange):
-            if not astronaut:
-                astronaut = True
-                logger.info("Astronaut Detected")
-                sense.show_animation(animations.astronaut_here)
+            astronaut = True
         else:
-            if astronaut:
-                astronaut = False
-                logger.info("Astronaut Left")
-                sense.show_animation(animations.astronaut_away)
-            if humidity < (avg - 2*valrange):
-                logger.info("Retaking Baseline")
-                sense.show_animation(animations.baseline)
-                avg, valrange = take_baseline(sense)
-                sense.show_animation(animations.astronaut_away)
-        time.sleep(10)
+            astronaut = False
 
-if __name__ == "__main__":
-    logging.basicConfig()
-    s = animated_sense_hat.AnimatedSenseHat()
-    run_experiment(5, s)
+        if astronaut and not prev_astronaut:
+            logger.info("Astronaut Detected")
+            sense.show_animation(animations.astronaut_here)
+        elif not astronaut and prev_astronaut:
+            logger.info("Astronaut Left")
+            sense.show_animation(animations.astronaut_away)
+
+        if humidity < (avg - 2*valrange):
+            logger.info("Retaking Baseline")
+            sense.show_animation(animations.baseline)
+            avg, valrange = take_baseline(sense)
+            sense.show_animation(animations.astronaut_away)
+            astronaut = False
+
+        prev_astronaut = astronaut
+        time.sleep(10)
