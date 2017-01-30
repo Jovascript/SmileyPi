@@ -30,7 +30,6 @@ def get_abs_humidity(sense):
 
 def take_baseline(sense):
     """Take a baseline(sample of normal values)"""
-    sense.clear(0, 0, 255)
     measurements = []
     for _ in range(5):
         measurements.append(get_abs_humidity(sense))
@@ -58,10 +57,14 @@ def run_experiment(duration, sense: animated_sense_hat.AnimatedSenseHat):
                 astronaut = False
                 logger.info("Astronaut Left")
                 sense.show_animation(animations.astronaut_away)
-            if humidity < (avg + 2*valrange):
+            if humidity < (avg - 2*valrange):
                 logger.info("Retaking Baseline")
                 sense.show_animation(animations.baseline)
                 avg, valrange = take_baseline(sense)
                 sense.show_animation(animations.astronaut_away)
         time.sleep(10)
-    
+
+if __name__ == "__main__":
+    logging.basicConfig()
+    s = animated_sense_hat.AnimatedSenseHat()
+    run_experiment(5, s)
