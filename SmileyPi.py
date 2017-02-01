@@ -61,7 +61,7 @@ def test(mytype):
         else:
             secondary.run_experiment(10, 10, sense)
     except KeyboardInterrupt:
-        pass
+        logger.info("STOPPED")
     sense.halt_animations()
 
 if __name__ == "__main__":

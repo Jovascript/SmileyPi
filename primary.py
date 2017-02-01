@@ -45,6 +45,7 @@ def run_experiment(duration, sense: animated_sense_hat.AnimatedSenseHat):
     num_loops = duration*6 # Get duration in seconds (*60) and divide by 10, for loops.
     num_loops -= (5) # Take away some loops to estimate baseline time consumption.
     sense.show_animation(animations.baseline)
+    logger.info("Starting Experiment")
     avg, valrange = take_baseline(sense)
     astronaut = prev_astronaut = False
     for _ in range(num_loops):
