@@ -8,8 +8,6 @@ import atmos  # pip it
 import animations
 import animated_sense_hat
 
-
-
 def get_abs_humidity(sense):
     """Get the absolute humidity,
     handles unit conversions(why does sense hat not use SI units?)"""
@@ -30,17 +28,20 @@ def get_abs_humidity(sense):
 
 def take_baseline(sense):
     """Take a baseline(sample of normal values)"""
+    # Show appropriate animation.
+    sense.show_animation(animations.baseline)
     measurements = []
     for _ in range(5):
         measurements.append(get_abs_humidity(sense))
         time.sleep(5)
     avg = sum(measurements)/len(measurements)
     valrange = max(measurements) - min(measurements)
+    sense.show_animation(animations.astronaut_away)
     return avg, valrange
 
 def run_experiment(duration, sense: animated_sense_hat.AnimatedSenseHat):
     """Runs the primary experiment, given its duration in minutes"""
-    logger = logging.getLogger("Primary")
+    logger = logging.getLogger("SmileyPi.primary")
     num_loops = duration*6 # Get duration in seconds (*60) and divide by 10, for loops.
     num_loops -= (5) # Take away some loops to estimate baseline time consumption.
     sense.show_animation(animations.baseline)
@@ -48,10 +49,7 @@ def run_experiment(duration, sense: animated_sense_hat.AnimatedSenseHat):
     astronaut = prev_astronaut = False
     for _ in range(num_loops):
         humidity = get_abs_humidity(sense)
-        if humidity > (avg + 2*valrange):
-            astronaut = True
-        else:
-            astronaut = False
+        astronaut = humidity > (avg + 2*valrange)
 
         if astronaut and not prev_astronaut:
             logger.info("Astronaut Detected")
@@ -62,9 +60,7 @@ def run_experiment(duration, sense: animated_sense_hat.AnimatedSenseHat):
 
         if humidity < (avg - 2*valrange):
             logger.info("Retaking Baseline")
-            sense.show_animation(animations.baseline)
             avg, valrange = take_baseline(sense)
-            sense.show_animation(animations.astronaut_away)
             astronaut = False
 
         prev_astronaut = astronaut

@@ -134,3 +134,15 @@ baseline = [
     ]
 
 ]
+night = [
+    [
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O,
+        O, O, O, O, O, O, O, O
+    ]
+]
