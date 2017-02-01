@@ -42,14 +42,16 @@ def prepare_dirs():
 
 def run():
     "run experiment"
+    logger.info("Running Experiments")
     sense = AnimatedSenseHat()
     try:
+        logger.info("Running Primary Experiment")
         primary.run_experiment(PRIMARY_DURATION, sense)
+        logger.info("Running Secondary Experiment")
         secondary.run_experiment(SECONDARY_DURATION, SECONDARY_MEASUREMENT_FREQUENCY, sense)
     except KeyboardInterrupt:
         logger.info("STOPPED")
     sense.halt_animations()
-    
 
 def test(mytype):
     sense = AnimatedSenseHat()
