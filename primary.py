@@ -54,7 +54,7 @@ def run_experiment(duration, sense: animated_sense_hat.AnimatedSenseHat):
     for _ in range(num_loops):
         humidity = get_abs_humidity(sense)
         logger.debug("Humidity: " + str(humidity))
-        astronaut = humidity > (avg + valrange)
+        astronaut = humidity > (avg + 1.5*valrange)
 
         if astronaut and not prev_astronaut:
             logger.info("Astronaut Detected")
