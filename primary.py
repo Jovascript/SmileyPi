@@ -42,14 +42,18 @@ def take_baseline(sense):
 def run_experiment(duration, sense: animated_sense_hat.AnimatedSenseHat):
     """Runs the primary experiment, given its duration in minutes"""
     logger = logging.getLogger("SmileyPi.primary")
+    logger.info("Starting Experiment")
+
     num_loops = duration*6 # Get duration in seconds (*60) and divide by 10, for loops.
     num_loops -= (5) # Take away some loops to estimate baseline time consumption.
+
     sense.show_animation(animations.baseline)
-    logger.info("Starting Experiment")
     avg, valrange = take_baseline(sense)
     astronaut = prev_astronaut = False
+    logger.debug("Avg: " + str(avg) + ", Range: "+ str(valrange))
     for _ in range(num_loops):
         humidity = get_abs_humidity(sense)
+        logger.debug("Humidity: " + str(humidity))
         astronaut = humidity > (avg + 2*valrange)
 
         if astronaut and not prev_astronaut:
