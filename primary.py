@@ -1,11 +1,15 @@
-"""Perform the primary experiment
-@author = Joe Bell"""
+"""
+primary.py - Perform the primary experiment
+Author: Joe Bell
+"""
+
 import time
 import logging
 
 import atmos  # pip it
 
 import animations
+import datalogger
 import animated_sense_hat
 
 def get_abs_humidity(sense):
@@ -44,17 +48,23 @@ def run_experiment(duration, sense: animated_sense_hat.AnimatedSenseHat):
     logger = logging.getLogger("SmileyPi.primary")
     logger.info("Starting Experiment")
 
-    num_loops = duration*6 # Get duration in seconds (*60) and divide by 10, for loops.
-    num_loops -= (5) # Take away some loops to estimate baseline time consumption.
+    datalog = datalogger.DataLogger("primary", ["timestamp", "humidity", "astronaut"])
+
+    # Convert to seconds, and then take away half minute for innacuracy
+    duration = (duration * 60) - 30
+    start_time = int(time.time()) # Get start time
 
     sense.show_animation(animations.baseline)
     avg, valrange = take_baseline(sense)
     astronaut = prev_astronaut = False
     logger.debug("Avg: " + str(avg) + ", Range: "+ str(valrange))
-    for _ in range(num_loops):
+    while True:
         humidity = get_abs_humidity(sense)
         logger.debug("Humidity: " + str(humidity))
         astronaut = humidity > (avg + 1.5*valrange)
+
+        timestr = time.strftime("%Y-%m-%d %H:%M:%S")
+        datalog.writerow(timestamp=timestr, humidity=humidity, astronaut=int(astronaut))
 
         if astronaut and not prev_astronaut:
             logger.info("Astronaut Detected")
@@ -68,5 +78,10 @@ def run_experiment(duration, sense: animated_sense_hat.AnimatedSenseHat):
             avg, valrange = take_baseline(sense)
             astronaut = False
 
+        if int(time.time()) >= (start_time + duration):
+            logger.info("Experiment Time Finished")
+            break
+
         prev_astronaut = astronaut
         time.sleep(10)
+    datalog.close()

@@ -1,4 +1,8 @@
-"""The main file for the experiments."""
+"""
+SmileyPi.py - Main file for running experiments
+Author: Joe Bell
+"""
+
 import os
 import sys
 import time
@@ -41,7 +45,7 @@ def prepare_dirs():
     os.makedirs("data", exist_ok=True)
 
 def run():
-    "run experiment"
+    """Run Experiment"""
     logger.info("Running Experiments")
     sense = AnimatedSenseHat()
     try:
@@ -54,6 +58,7 @@ def run():
     sense.halt_animations()
 
 def test(mytype):
+    """Run test on specific part"""
     sense = AnimatedSenseHat()
     try:
         if mytype == "primary":

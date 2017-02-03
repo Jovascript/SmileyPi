@@ -1,6 +1,10 @@
+"""
+datalogger.py - Class for logging data to csv file(convenience)
+Author: Joe Bell
+"""
+
 import csv
 import time
-import logging
 
 class DataLogger:
     """A class for logging data"""

@@ -1,4 +1,8 @@
-"""Runs the secondary experiment"""
+"""
+secondary.py - Runs the secondary experiment
+Author: Joe Bell
+"""
+
 import time
 import logging
 

@@ -1,4 +1,9 @@
-# Advance warning: I'm not an artist, I'm a programmer
+"""
+animations.py - Contains all the animation lists.
+Author: Joe Bell
+
+Advance warning: I'm not an artist, I'm a programmer
+"""
 
 # Colours
 red = [255, 0, 0]
