@@ -12,7 +12,9 @@ This installation might be a little tricky, but:
 
 This is complicated by the fact that, for some reason, pip3 stops working:(Cannot import packaging.version)
 This may be allieviated by:
-```sudo -i
+
+```
+sudo -i
 apt-get purge -y python3-pip
 wget https://bootstrap.pypa.io/get-pip.py
 python3 ./get-pip.py
