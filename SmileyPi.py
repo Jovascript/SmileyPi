@@ -70,8 +70,8 @@ def test(mytype):
     sense.halt_animations()
 
 if __name__ == "__main__":
-    logger = prepare_logger("SmileyPi")
     prepare_dirs()
+    logger = prepare_logger("SmileyPi")
     if len(sys.argv) > 1:
         if sys.argv[1] == "primary":
             test("primary")
