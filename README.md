@@ -10,6 +10,17 @@ This installation might be a little tricky, but:
  - atmos (via pip)
  - Of course, the sense_hat library
 
+This is complicated by the fact that, for some reason, pip3 stops working:(Cannot import packaging.version)
+This may be allieviated by:
+```sudo -i
+apt-get purge -y python3-pip
+wget https://bootstrap.pypa.io/get-pip.py
+python3 ./get-pip.py
+apt-get install python3-pip
+```
+This is not our fault, or anyone's, so bear this in mind if the code does not work.
+
+
 ### Execution
 To execute the experiment, simply run `python3 SmileyPi.py` **in the SmileyPi directory**
 
@@ -36,4 +47,3 @@ It should:
 - Calculate when ISS is in shadow, umbra or penumbra.
 - Calculate a 'light intensity' percentage.
 - Log this along with the time and temperature.
-
