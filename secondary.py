@@ -26,7 +26,7 @@ def run_experiment(duration, measurement_freq, sense):
     anim = animations.sun_full
     sense.show_animation(anim)
 
-    for _ in range(num_loops):
+    for i in range(num_loops):
         temperature = sense.get_temperature()
         datestr = time.strftime("%Y-%m-%d %H:%M:%S")
         light = shadow.get_light_intensity()
