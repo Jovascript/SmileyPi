@@ -57,25 +57,31 @@ def run():
         logger.info("STOPPED")
     sense.halt_animations()
 
-def test(mytype):
+def test(mytype, duration):
     """Run test on specific part"""
     sense = AnimatedSenseHat()
     try:
         if mytype == "primary":
-            primary.run_experiment(10, sense)
+            primary.run_experiment(duration, sense)
         else:
-            secondary.run_experiment(10, 10, sense)
+            secondary.run_experiment(duration, 10, sense)
     except KeyboardInterrupt:
         logger.info("STOPPED")
     sense.halt_animations()
 
+
 if __name__ == "__main__":
     prepare_dirs()
     logger = prepare_logger("SmileyPi")
+
     if len(sys.argv) > 1:
+        try:
+            duration = int(sys.argv[2])
+        except (IndexError, TypeError):
+            duration = 10
         if sys.argv[1] == "primary":
-            test("primary")
+            test("primary", duration)
         else:
-            test("seconary")
+            test("seconary", duration)
     else:
         run()
