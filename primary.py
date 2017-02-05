@@ -40,6 +40,8 @@ def take_baseline(sense):
         time.sleep(5)
     avg = sum(measurements)/len(measurements)
     valrange = max(measurements) - min(measurements)
+    if valrange > 5:
+        avg, valrange = take_baseline(sense)
     sense.show_animation(animations.astronaut_away)
     return avg, valrange
 
