@@ -75,7 +75,7 @@ def run_experiment(duration, sense: animated_sense_hat.AnimatedSenseHat):
             logger.info("Astronaut Left")
             sense.show_animation(animations.astronaut_away)
 
-        if humidity < (avg - 2*valrange):
+        if humidity < (avg - valrange):
             logger.info("Retaking Baseline")
             avg, valrange = take_baseline(sense)
             astronaut = False
