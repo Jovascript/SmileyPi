@@ -15,6 +15,7 @@ import primary, secondary
 PRIMARY_DURATION = 90
 SECONDARY_DURATION = 90
 SECONDARY_MEASUREMENT_FREQUENCY = 5
+LIGHTING = True
 
 
 def prepare_logger(name)->logging.Logger:
@@ -47,7 +48,7 @@ def prepare_dirs():
 def run():
     """Run Experiment"""
     logger.info("Running Experiments")
-    sense = AnimatedSenseHat()
+    sense = AnimatedSenseHat(LIGHTING)
     try:
         logger.info("Running Primary Experiment")
         primary.run_experiment(PRIMARY_DURATION, sense)
@@ -59,7 +60,7 @@ def run():
 
 def test(mytype, duration):
     """Run test on specific part"""
-    sense = AnimatedSenseHat()
+    sense = AnimatedSenseHat(LIGHTING)
     try:
         if mytype == "primary":
             primary.run_experiment(duration, sense)

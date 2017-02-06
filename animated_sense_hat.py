@@ -8,13 +8,14 @@ from sense_hat import SenseHat
 
 class AnimatedSenseHat(SenseHat):
     """Handles threaded animation runner."""
-    def __init__(self, imu_settings_file='RTIMULib', text_assets='sense_hat_text'):
+    def __init__(self, lighting=True, imu_settings_file='RTIMULib', text_assets='sense_hat_text'):
         super().__init__(imu_settings_file, text_assets)
         self.queue = Queue() # A thread-safe data interchange?
         # I hope
 
         self.thread = threading.Thread(target=self.run_animator)
-        self.thread.start()
+        if lighting:
+            self.thread.start()
 
     def show_animation(self, animation):
         """Changes the animation running(threadsafe)"""
