@@ -51,6 +51,9 @@ class AnimatedSenseHat(SenseHat):
             if not self.queue.empty():
                 # We ingore the risk that the queue might be changed in this time.
                 # This (should) be the only thread accessing it.
-                status = self.queue.get()
+                temp = self.queue.get()
+                if temp != status:
+                    status = temp
+                    i = 0
         # Clear the matrix when stopping thread.
         self.clear()
