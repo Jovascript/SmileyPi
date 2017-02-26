@@ -40,6 +40,7 @@ astronaut_here = [
         X, O, X, X, X, X, O, X,
     ]
 ]
+
 # Animation for when astronaut is not present.
 X = red
 astronaut_away = [
@@ -100,6 +101,7 @@ sunrise = [
     ]
 ]
 
+# When the ISS is in full sun
 sun_full = [
     [
         O, O, X, X, X, X, O, O,
@@ -114,7 +116,6 @@ sun_full = [
 ]
 
 # Animation for taking baseline.
-
 X = green
 baseline = [
     [
@@ -139,6 +140,8 @@ baseline = [
     ]
 
 ]
+
+# When the ISS is in shadow?
 night = [
     [
         O, O, O, O, O, O, O, O,

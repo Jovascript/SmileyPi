@@ -16,6 +16,7 @@ def get_abs_humidity(sense):
     """Get the absolute humidity,
     handles unit conversions(why does sense hat not use SI units?)"""
 
+    # Get relative humidity
     relh = sense.get_humidity()
 
     # Get pressure, and convert from mB to Pa

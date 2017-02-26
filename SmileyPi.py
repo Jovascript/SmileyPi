@@ -48,6 +48,7 @@ def prepare_dirs():
 def run():
     """Run Experiment"""
     logger.info("Running Experiments")
+    start_time = time.time() # Record Start Time
     sense = AnimatedSenseHat(LIGHTING)
     try:
         logger.info("Running Primary Experiment")
@@ -57,6 +58,7 @@ def run():
     except KeyboardInterrupt:
         logger.info("STOPPED")
     sense.halt_animations()
+    print(time.time()-start_time)
 
 def test(mytype, duration):
     """Run test on specific part"""
