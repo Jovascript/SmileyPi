@@ -32,15 +32,12 @@ def run_experiment(duration, measurement_freq, sense):
         light = shadow.get_light_intensity()
         datalog.writerow(timestamp=datestr, temp=temperature, light_intensity=light)
 
-        if light == 100 and anim != animations.sun_full:
-            anim = animations.sun_full
-            sense.show_animation(anim)
-        elif light > 0 and anim != animations.sunrise:
-            anim = animations.sunrise
-            sense.show_animation(anim)
-        elif anim != animations.night:
-            anim = animations.night
-            sense.show_animation(anim)
+        if light == 100:
+            sense.show_animation(animations.sun_full)
+        elif light > 0:
+            sense.show_animation(animations.sunrise)
+        else:
+            sense.show_animation(animations.night)
 
         time.sleep(measurement_freq)
 
