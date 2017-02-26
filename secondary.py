@@ -32,6 +32,8 @@ def run_experiment(duration, measurement_freq, sense):
         light = shadow.get_light_intensity()
         datalog.writerow(timestamp=datestr, temp=temperature, light_intensity=light)
 
+        logger.debug(light)
+
         if light == 100:
             sense.show_animation(animations.sun_full)
         elif light > 0:
