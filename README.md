@@ -28,6 +28,8 @@ To execute the experiment, simply run `python3 SmileyPi.py` **in the SmileyPi di
 
 It will deposit the data files, in csv format, in the `data` directory, and logs in the `logs` directory.
 
+**N.B. The secondary mission requires an up-to-date TLE file of the ISS in the `shadow.py` file.**
+
 ## Testing
 ### Whole Script
 Simply run SmileyPi.py, with python 3.
