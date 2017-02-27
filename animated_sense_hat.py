@@ -1,4 +1,7 @@
-""" A subclass of sense hat for running the sense hat animations."""
+"""
+animated_sense_hat.py - Subclass of SenseHat with threaded animations.
+Author: Joe Bell
+"""
 import threading
 import time
 from queue import Queue

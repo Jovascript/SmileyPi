@@ -1,10 +1,14 @@
+"""
+shadow.py - Calculates SHADOWS
+Author: Joe Bell
+"""
+
 import ephem
 import math
-import time
 
-#https://celestrak.com/columns/v03n01/
+# Algorithm Source: https://celestrak.com/columns/v03n01/
 
-tle = """ISS (ZARYA)             
+tle = """ISS (ZARYA)
 1 25544U 98067A   17057.64301881  .00002697  00000-0  47432-4 0  9999
 2 25544  51.6412 229.3560 0006324 237.5072 217.1975 15.54464085 44562"""
 
@@ -23,12 +27,12 @@ def coord_diff(c1, c2):
     '''Find the diffrence between two sets of coords'''
     diff = []
     for i in range(len(c1)): # Any number of coord dimensions
-        diff.append(c2[i] - c1[i])
+        diff.append(c2[i] - c1[i]) # Find diff between one dimension
     return tuple(diff)
 
-    
 def dot_product(c1,c2):
     '''Find the dot product of two vectors, given their end point(start point is the origin)'''
+    # Dot product through coords
     dot = 0
     for i in range(len(c1)):
         dot += c1[i]*c2[i]
@@ -36,6 +40,7 @@ def dot_product(c1,c2):
 
 def get_eci(ra, dec, dist):
     '''Get the Earth Centered Inertial Coords, given dist and spherical'''
+    # Source: Wikipedia
     x = dist * math.cos(dec) * math.cos(ra)
     y = dist * math.cos(dec) * math.sin(ra)
     z = dist * math.sin(dec)
@@ -74,7 +79,10 @@ def calculate_shadow():
     # The amount(angle) the sun's radius takes up from the ISS
     theta_sun = math.asin(ephem.sun_radius/sun_dist)
     # The percieved angle between the sun's and the earth's centers
-    theta = math.acos(dot_product(coord_diff(iss_coords, earth_coords), coord_diff(iss_coords, sun_coords))/(sun_dist*iss_dist))
+    theta = math.acos(
+        dot_product(coord_diff(iss_coords, earth_coords), coord_diff(iss_coords, sun_coords))
+        /(sun_dist*iss_dist)
+    )
 
     # Whether the ISS is in the umbra(if the earth is seen to fully eclipse the sun)
     umbra = (theta_earth > theta_sun) and theta < (theta_earth - theta_sun)
@@ -87,7 +95,7 @@ def calculate_shadow():
         theta_min = theta_earth - theta_sun
         theta_max = theta_earth + theta_sun
         # Range of possible theta values
-        theta_range = theta_max = theta_min
+        theta_range = theta_max - theta_min
         if (theta_range == 0):
             # Unlikely
             percent_value = 0

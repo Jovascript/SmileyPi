@@ -49,6 +49,7 @@ def run():
     """Run Experiment"""
     logger.info("Running Experiments")
     start_time = time.time() # Record Start Time
+    # Get cool sense hat
     sense = AnimatedSenseHat(LIGHTING)
     try:
         logger.info("Running Primary Experiment")
@@ -58,7 +59,9 @@ def run():
     except KeyboardInterrupt:
         logger.info("STOPPED")
     sense.halt_animations()
-    print(time.time()-start_time)
+
+    logger.info("Ran for " + str((time.time()-start_time)/60) + " minutes.")
+    
 
 def test(mytype, duration):
     """Run test on specific part"""
